@@ -39,7 +39,7 @@ const projects = [
     status: "Postulado",
     theme: "Economía Circular",
     academicUnit: "Escuela de Ingeniería Civil",
-    leader: "ÁLVARO DÍAZ",
+    leader: "Álvaro Díaz",
     amount: "$246.000.000",
     supportType: "Total (Total)",
     applicationDate: "17 de mayo de 2025",
@@ -53,7 +53,7 @@ const projects = [
     status: "Postulado",
     theme: "Economía Circular",
     academicUnit: "Escuela de Ingeniería Química",
-    leader: "CARLOS JAVIER CARLESI",
+    leader: "Carlos Javier Carlesi",
     amount: "$30.000.000",
     supportType: "Parcial (Formulación y Postulación)",
     applicationDate: "30 de abril de 2025",
@@ -66,7 +66,7 @@ const projects = [
     status: "Postulado",
     theme: "Interdisciplina",
     academicUnit: "Facultad de Ingeniería",
-    leader: "SEBASTIÁN CARLOS FINGERHUTH",
+    leader: "Sebastián Carlos Fingerhuth",
     amount: "$259.000.000",
     supportType: "Total (Total)",
     applicationDate: "24 de abril de 2025",
@@ -80,7 +80,7 @@ const projects = [
     status: "Postulado",
     theme: "Hidrógeno",
     academicUnit: "Facultad de Ingeniería",
-    leader: "SEBASTIÁN CARLOS FINGERHUTH",
+    leader: "Sebastián Carlos Fingerhuth",
     amount: "No especificado",
     supportType: "Total (Total)",
     applicationDate: "6 de abril de 2025",
@@ -136,7 +136,7 @@ function ProjectCard({ project }) {
         <CardContent className="p-0 border-t border-gray-100 mt-3">
           <div className="grid grid-cols-1 divide-y divide-gray-100">
             <div className="p-4">
-              <p className="text-sm text-gray-500 mb-1">Fecha de postulación</p>
+              <p className="text-sm text-gray-500 mb-1">Fecha de registro</p>
               <p className="text-sm">{project.applicationDate}</p>
             </div>
 
@@ -263,7 +263,7 @@ export default function VisualizacionPage() {
         <div className="flex justify-end mt-4 gap-2">
           <Button
             variant="secondary"
-            className="bg-red-200 text-md  hover:bg-red-300 cursor-pointer"
+            className="bg-red-600 text-md text-white hover:bg-red-500 cursor-pointer"
             onClick={() => exportarPDF(projects)}
           >
             <FileDown className="w-4 h-4 mr-2" />
@@ -271,7 +271,7 @@ export default function VisualizacionPage() {
           </Button>
           <Button
             variant="secondary"
-            className="bg-green-200 text-md  hover:bg-green-300 cursor-pointer"
+            className="bg-green-600 text-md text-white hover:bg-green-500 cursor-pointer"
             onClick={() => exportarExcel(projects)}
           >
             <FileDown className="w-4 h-4 mr-2" />

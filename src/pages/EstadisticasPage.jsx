@@ -9,6 +9,8 @@ import {
   University,
   ChevronDown, // Importar ChevronDown para el icono de expandir/colapsar
   ChevronUp, // Importar ChevronUp para el icono de expandir/colapsar
+  ArrowDownToLine,
+  ArrowUpToLine,
 } from "lucide-react";
 import {
   PieChart as RechartsPieChart,
@@ -329,11 +331,18 @@ export default function EstadisticasPage() {
           className="w-full space-y-4"
         >
           <div className="flex items-center justify-between space-x-4 px-4 py-2 bg-gray-100 rounded-lg shadow-sm">
-            <h3 className="text-md font-semibold text-gray-800">
+            {/* MODIFICACIÓN AQUÍ para el texto y el icono de la izquierda */}
+            <h3 className="flex items-center text-md text-gray-800">
+              {isIndicatorsOpen ? (
+                <ArrowUpToLine className="h-5 w-5 mr-2 text-gray-700" />
+              ) : (
+                <ArrowDownToLine className="h-5 w-5 mr-2 text-gray-700" />
+              )}
               {isIndicatorsOpen
                 ? "Contraer Indicadores"
                 : "Expandir Indicadores"}
             </h3>
+            {/* El Chevron a la derecha permanece igual */}
             <CollapsibleTrigger asChild>
               <button className="rounded-full w-9 h-9 flex items-center justify-center hover:bg-gray-200">
                 {isIndicatorsOpen ? (

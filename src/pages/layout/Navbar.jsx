@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,21 +9,32 @@ import {
 import {
   BarChart3,
   Home,
-  FileText,
+  FileText, // Icono para Cartera de Proyectos (el menú)
   User,
   ChevronDown,
   BarChart,
   DollarSign,
   ClipboardList,
+  Plus, // Icono para Añadir Proyecto
+  Edit, // Icono para Editar Proyectos
 } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom"; // Importar hooks de react-router-dom
 
-// Asumo que querrás manejar la navegación en el componente padre
-// o pasar un prop `onNavigate` para cambiar el estado `currentView`.
-// Por ahora, solo simularé el click.
+export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation(); // Hook para obtener la ubicación actual
 
-// Prop `activeItem` para saber qué botón del navbar debe estar activo
-// Prop `onNavItemClick` para manejar la navegación desde el componente padre
-export default function Navbar({ activeItem = "cartera", onNavItemClick }) {
+  // Función para manejar la navegación
+  const handleNavItemClick = (path) => {
+    navigate(path);
+  };
+
+  // Función auxiliar para determinar si un elemento de navegación debe estar activo
+  const isActive = (paths) => {
+    const pathArray = Array.isArray(paths) ? paths : [paths];
+    return pathArray.some(path => location.pathname === path);
+  };
+
   return (
     <header className="bg-[#2E5C8A] shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,8 +42,8 @@ export default function Navbar({ activeItem = "cartera", onNavItemClick }) {
           <div className="flex items-center space-x-8">
             {/* Logo y Título de la Aplicación */}
             <div
-              className="flex items-center space-x-2 group cursor-pointer" // <-- AQUÍ SE AGREGA
-              onClick={() => onNavItemClick("home")}
+              className="flex items-center space-x-2 group cursor-pointer"
+              onClick={() => handleNavItemClick("/")} // Ruta raíz para inicio
             >
               <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
                 <BarChart3 className="w-5 h-5 text-[#2E5C8A]" />
@@ -46,9 +58,9 @@ export default function Navbar({ activeItem = "cartera", onNavItemClick }) {
               <Button
                 variant="ghost"
                 className={`text-white cursor-pointer hover:bg-white/10 hover:text-white ${
-                  activeItem === "home" ? "bg-white/10" : ""
+                  isActive("/") ? "bg-white/10" : "" // Home es la ruta raíz
                 }`}
-                onClick={() => onNavItemClick("home")}
+                onClick={() => handleNavItemClick("/")}
               >
                 <Home className="w-4 h-4 mr-2" />
                 Inicio
@@ -56,23 +68,47 @@ export default function Navbar({ activeItem = "cartera", onNavItemClick }) {
               <Button
                 variant="ghost"
                 className={`text-white cursor-pointer hover:bg-white/10 hover:text-white ${
-                  activeItem === "visualizacion" ? "bg-white/10" : ""
+                  isActive("/visualizacion") ? "bg-white/10" : ""
                 }`}
-                onClick={() => onNavItemClick("visualizacion")}
+                onClick={() => handleNavItemClick("/visualizacion")}
               >
                 <BarChart3 className="w-4 h-4 mr-2" />
                 Visualización
               </Button>
-              <Button
-                variant="ghost"
-                className={`text-white cursor-pointer hover:bg-white/10 hover:text-white ${
-                  activeItem === "cartera" ? "bg-white/10" : ""
-                }`}
-                onClick={() => onNavItemClick("cartera")}
-              >
-                <FileText className="w-4 h-4 mr-2" />
-                Cartera de proyectos
-              </Button>
+
+              {/* Dropdown para "Cartera de proyectos" */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className={`text-white cursor-pointer hover:bg-white/10 hover:text-white ${
+                      isActive(["/anadir-proyectos", "/editar-proyectos"]) // Active si una de las sub-rutas está activa
+                        ? "bg-white/10"
+                        : ""
+                    }`}
+                  >
+                    <FileText className="w-4 h-4 mr-2" />
+                    Cartera de proyectos
+                    <ChevronDown className="w-4 h-4 ml-1 -mr-1" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-white shadow-lg rounded-md mt-2">
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-gray-100 p-2 rounded-md"
+                    onClick={() => handleNavItemClick("/anadir-proyectos")}
+                  >
+                    <Plus className="w-4 h-4 mr-2 text-gray-700" />
+                    Añadir proyecto
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-gray-100 p-2 rounded-md"
+                    onClick={() => handleNavItemClick("/editar-proyectos")}
+                  >
+                    <Edit className="w-4 h-4 mr-2 text-gray-700" />
+                    Editar proyectos (Administrar datos)
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
               {/* Dropdown para "Perfiles de proyecto" */}
               <DropdownMenu>
@@ -80,38 +116,34 @@ export default function Navbar({ activeItem = "cartera", onNavItemClick }) {
                   <Button
                     variant="ghost"
                     className={`text-white cursor-pointer hover:bg-white/10 hover:text-white ${
-                      activeItem === "perfiles" || // Si "perfiles" es la vista activa o una de sus sub-vistas
-                      activeItem === "estadisticas" ||
-                      activeItem === "fondos" ||
-                      activeItem === "formularios"
+                      isActive(["/estadisticas", "/fondos", "/formularios"]) // Active si una de las sub-rutas está activa
                         ? "bg-white/10"
                         : ""
                     }`}
                   >
                     <User className="w-4 h-4 mr-2" />
                     Perfiles de proyecto
-                    <ChevronDown className="w-4 h-4 ml-1 -mr-1" />{" "}
-                    {/* Icono de flecha hacia abajo */}
+                    <ChevronDown className="w-4 h-4 ml-1 -mr-1" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 bg-white shadow-lg rounded-md mt-2">
                   <DropdownMenuItem
                     className="cursor-pointer hover:bg-gray-100 p-2 rounded-md"
-                    onClick={() => onNavItemClick("estadisticas")}
+                    onClick={() => handleNavItemClick("/estadisticas")}
                   >
                     <BarChart className="w-4 h-4 mr-2 text-gray-700" />
                     Estadísticas
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="cursor-pointer hover:bg-gray-100 p-2 rounded-md"
-                    onClick={() => onNavItemClick("fondos")}
+                    onClick={() => handleNavItemClick("/fondos")}
                   >
                     <DollarSign className="w-4 h-4 mr-2 text-gray-700" />
                     Fondos
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="cursor-pointer hover:bg-gray-100 p-2 rounded-md"
-                    onClick={() => onNavItemClick("formularios")}
+                    onClick={() => handleNavItemClick("/formularios")}
                   >
                     <ClipboardList className="w-4 h-4 mr-2 text-gray-700" />
                     Formularios

@@ -202,7 +202,7 @@ export default function HomePage() {
 
                 <Button
                   className="h-20 bg-[#3172b3] hover:bg-[#617fac] text-white justify-start p-6 group transition-transform hover:scale-[1.02] cursor-pointer"
-                  onClick={() => navigate("/cartera")}
+                  onClick={() => navigate("/anadir-proyectos")}
                   size="lg"
                 >
                   <div className="flex items-center space-x-4">
@@ -222,7 +222,7 @@ export default function HomePage() {
                 <Button
                   className="h-20 bg-[#4c86e2] hover:bg-[#82b2ff] text-white justify-start p-6 group transition-transform hover:scale-[1.02] cursor-pointer"
                   size="lg"
-                  onClick={() => navigate("/cartera")}
+                  onClick={() => navigate("/editar-proyectos")}
                 >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center transition-colors">
