@@ -195,7 +195,6 @@ export default function AnadirProyectosPage() {
                         {theme.name}
                       </SelectItem>
                     ))}
-                    <SelectItem value="otro">Otro / Por Definir</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -284,7 +283,6 @@ export default function AnadirProyectosPage() {
                         {status.name}
                       </SelectItem>
                     ))}
-                    <SelectItem value="otro">Otro / Por Definir</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -308,7 +306,6 @@ export default function AnadirProyectosPage() {
                         {conv.name}
                       </SelectItem>
                     ))}
-                    <SelectItem value="otro">Otro / Por Definir</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -332,7 +329,6 @@ export default function AnadirProyectosPage() {
                         {unit.name}
                       </SelectItem>
                     ))}
-                    <SelectItem value="otro">Otro / Por Definir</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -374,45 +370,6 @@ export default function AnadirProyectosPage() {
                     ))}
                   </div>
                 )}
-
-                {/* Botón para añadir académico personalizado */}
-                <div className="mt-2">
-                  {!showCustomAcademic ? (
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setShowCustomAcademic(true)}
-                      className="text-[#2E5C8A] border-[#2E5C8A] hover:bg-[#2E5C8A] hover:text-white"
-                    >
-                      <UserPlus className="w-4 h-4 mr-2" />
-                      Añadir académico no registrado
-                    </Button>
-                  ) : (
-                    <div className="flex gap-2">
-                      <Input
-                        placeholder="Nombre del académico"
-                        value={customAcademic}
-                        onChange={(e) => setCustomAcademic(e.target.value)}
-                        className="flex-1"
-                      />
-                      <Button
-                        size="sm"
-                        onClick={handleAddCustomAcademic}
-                        className="bg-[#2E5C8A] hover:bg-[#1E4A6F]"
-                      >
-                        Añadir
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => setShowCustomAcademic(false)}
-                      >
-                        Cancelar
-                      </Button>
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
           </div>

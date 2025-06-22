@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -32,7 +31,7 @@ export default function Navbar() {
   // Función auxiliar para determinar si un elemento de navegación debe estar activo
   const isActive = (paths) => {
     const pathArray = Array.isArray(paths) ? paths : [paths];
-    return pathArray.some(path => location.pathname === path);
+    return pathArray.some((path) => location.pathname === path);
   };
 
   return (
@@ -98,14 +97,14 @@ export default function Navbar() {
                     onClick={() => handleNavItemClick("/anadir-proyectos")}
                   >
                     <Plus className="w-4 h-4 mr-2 text-gray-700" />
-                    Añadir proyecto
+                    Añadir Nuevo Proyecto
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="cursor-pointer hover:bg-gray-100 p-2 rounded-md"
                     onClick={() => handleNavItemClick("/editar-proyectos")}
                   >
                     <Edit className="w-4 h-4 mr-2 text-gray-700" />
-                    Editar proyectos (Administrar datos)
+                    Modificar Cartera de Proyectos
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
