@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { exportarPDF, exportarExcel } from "../lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +22,7 @@ import {
   Filter,
   ChevronRight,
   ChevronDown,
+  FileDown,
   Clock,
   DollarSign,
   Users,
@@ -43,7 +45,6 @@ const projects = [
     applicationDate: "17 de mayo de 2025",
     call: "FRPD GORE Valparaíso",
     comments: "Proyecto con apoyo total en la formulación",
-    lastUpdate: "hace 3 días",
   },
   {
     id: 2,
@@ -58,7 +59,6 @@ const projects = [
     applicationDate: "30 de abril de 2025",
     call: "FOVI",
     comments: "Proyecto postulado apoyado por Ivania",
-    lastUpdate: "hace 1 semana",
   },
   {
     id: 3,
@@ -73,7 +73,6 @@ const projects = [
     call: "FRPD GORE Valparaíso",
     comments:
       "Se han tenido conversaciones con Gianni, Lorena Jorquera e Iván Díaz (se estaría postulando en 2025)",
-    lastUpdate: "hace 2 horas",
   },
   {
     id: 4,
@@ -87,7 +86,6 @@ const projects = [
     applicationDate: "6 de abril de 2025",
     call: "Programa de Formación para la competitividad",
     comments: "-",
-    lastUpdate: "ayer",
   },
 ];
 
@@ -130,14 +128,6 @@ function ProjectCard({ project }) {
           <div className="flex items-center">
             <Tag className="w-4 h-4 text-gray-500 mr-2" />
             <p className="text-sm">{project.theme}</p>
-          </div>
-
-          {/* Esta sección del lastUpdate está dentro del contenido central */}
-          <div className="flex items-center">
-            <Clock className="w-4 h-4 text-gray-500 mr-2" />
-            <p className="text-xs text-gray-500">
-              Actualizado {project.lastUpdate}
-            </p>
           </div>
         </div>
       </CardContent>
@@ -189,7 +179,6 @@ export default function VisualizacionPage() {
     <div className="h-full bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Visualización de Proyectos
@@ -270,6 +259,26 @@ export default function VisualizacionPage() {
           </div>
         </div>
 
+        {/* Botones de exportar */}
+        <div className="flex justify-end mt-4 gap-2">
+          <Button
+            variant="secondary"
+            className="bg-red-200 text-md  hover:bg-red-300 cursor-pointer"
+            onClick={() => exportarPDF(projects)}
+          >
+            <FileDown className="w-4 h-4 mr-2" />
+            Exportar PDF
+          </Button>
+          <Button
+            variant="secondary"
+            className="bg-green-200 text-md  hover:bg-green-300 cursor-pointer"
+            onClick={() => exportarExcel(projects)}
+          >
+            <FileDown className="w-4 h-4 mr-2" />
+            Exportar Excel
+          </Button>
+        </div>
+
         {/* Tabs */}
         <Tabs defaultValue="todos" className="mb-6">
           <TabsList className="bg-white border border-gray-100">
@@ -332,18 +341,6 @@ export default function VisualizacionPage() {
             <Button variant="outline" size="sm">
               Siguiente
             </Button>
-          </div>
-          <div>
-            <Select defaultValue="10">
-              <SelectTrigger className="w-[80px]">
-                <SelectValue placeholder="10" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-                <SelectItem value="50">50</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
         </div>
       </main>

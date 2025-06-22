@@ -331,29 +331,6 @@ export default function HomePage() {
 
           {/* Right Column - Secondary Info */}
           <div className="space-y-6">
-            {/* Quick Links */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Exportar Cartera
-              </h3>
-              <div className="space-y-3">
-                <Button
-                  variant="secondary"
-                  className="w-full bg-red-100 text-md justify-start text-gray-700 hover:bg-red-200 cursor-pointer"
-                >
-                  <FileDown className="w-4 h-4 mr-3 stroke-red" />
-                  Exportar en PDF
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="w-full bg-green-100 text-md justify-start text-gray-700 hover:bg-green-200 cursor-pointer"
-                >
-                  <FileDown className="w-4 h-4 mr-3" />
-                  Exportar en Excel
-                </Button>
-              </div>
-            </div>
-
             {/* Notifications */}
             {/* <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
